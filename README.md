@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-# Notifier-Bot
-=======
 <p align="center">
 <a href="https://visheshbansal.ml">
-	<img src="https://i.ibb.co/KxrdfnF/vishesh-white.png" alt="Vishesh Bansal"/>
+	<img src="https://i.ibb.co/KxrdfnF/vishesh-white.png" alt="Vishesh Bansal"/ width="350px">
 </a>
 	<h2 align="center"> Notifier Bot </h2>
 	<h4 align="center"> A Bot to send announcements to FCM and Discord Channels </h4>
@@ -64,4 +61,3 @@ npm start
 	Made with :heart: by <a href="https://github.com/VisheshBansal">Vishesh Bansal</a>
 </p>
 
->>>>>>> 0442d44... Initial Commit
