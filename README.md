@@ -13,13 +13,14 @@ A Discord Bot written in JavaScript that makes announcement to other channels. N
 ## Features
 - [X] Sends notifications to other channels.
 - [X] Ping Roles
-- [ ] Sends messages to FCM 
+- [X] Sends messages to FCM 
 
 <br>
 
 ## Dependencies
  - Discord.js
  - firebase
+ - firebase-admin
 
 
 ## Running
