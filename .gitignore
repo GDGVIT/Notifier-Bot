@@ -4,3 +4,6 @@ node_modules
 .idea
 ./wt21key.json
 ./firebase_creds.json
+config.json
+file.json
+wt21key.json
