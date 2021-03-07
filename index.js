@@ -2,15 +2,16 @@ const Discord = require("discord.js");
 require("dotenv").config();
 const { prefix } = require("./config.json");
 const { post_channel } = require("./config.json");
+const { pingable_role } = require("./config.json");
 var admin = require("firebase-admin");
 const firebase = require("firebase/app");
 var serviceAccount = require("./wt21key.json");
+const getInfo = require("./firestore_tokens");
 
 admin.initializeApp({
 	credential: admin.credential.cert(serviceAccount),
 });
 
-var registrationToken = process.env.DEVICE_TOKEN;
 
 const client = new Discord.Client();
 
@@ -42,6 +43,7 @@ client.on("message", async (message) => {
 	const args = message.content.slice(prefix.length).trim().split(" ");
 	const command = args.shift().toLowerCase();
 
+	const registrationTokens = await getInfo.getTokens(admin)
 	// Announce to a channel
 	function announce_channel(message_args) {
 		const ann_channel = client.channels.cache.find((channel) => channel.name === post_channel);
@@ -55,11 +57,11 @@ client.on("message", async (message) => {
 				title: message_title,
 				body: message_args,
 			},
-			token: registrationToken,
+			tokens: registrationTokens,
 		};
 		admin
 			.messaging()
-			.send(message)
+			.sendMulticast(message)
 			.then((response) => {
 				// Response is a message ID string.
 				console.log("Successfully sent message:", response);
@@ -68,6 +70,7 @@ client.on("message", async (message) => {
 				console.log("Error sending message:", error);
 			});
 	}
+	let msgTitle,response2,response3,msgContent;
 
 	switch (command) {
 		case "post":
@@ -75,23 +78,43 @@ client.on("message", async (message) => {
 			ann_channel.send(message_body);
 			break;
 		case "notify":
-			send_fcm_message(message_title, message_send);
-			announce_channel(notify_message);
-
-		case "fcm":
 			await message.channel.send("Enter **FCM Message Title**");
 			const response2 = await message.channel.awaitMessages(
 				(m) => m.author.id === message.author.id,
 				{ max: 1 }
 			);
-			let msgTitle = response2.first().content;
+			msgTitle = response2.first().content;
 
 			await message.channel.send("Enter **FCM Message Body**");
 			const response3 = await message.channel.awaitMessages(
 				(m) => m.author.id === message.author.id,
 				{ max: 1 }
 			);
-			let msgContent = response3.first().content;
+			msgContent = response3.first().content;
+
+			console.log(msgTitle, msgContent);
+			send_fcm_message(msgTitle, msgContent);
+			var role = '<@&';
+			role = role.concat(pingable_role,'>')
+			announce_channel(role);
+			announce_channel(msgContent);
+			break;
+
+
+		case "fcm":
+			await message.channel.send("Enter **FCM Message Title**");
+			const resp2 = await message.channel.awaitMessages(
+				(m) => m.author.id === message.author.id,
+				{ max: 1 }
+			);
+			msgTitle = resp2.first().content;
+
+			await message.channel.send("Enter **FCM Message Body**");
+			const resp3 = await message.channel.awaitMessages(
+				(m) => m.author.id === message.author.id,
+				{ max: 1 }
+			);
+			msgContent = resp3.first().content;
 
 			console.log(msgTitle, msgContent);
 			send_fcm_message(msgTitle, msgContent);
