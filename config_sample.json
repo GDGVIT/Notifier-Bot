@@ -1,4 +1,6 @@
 {
   "prefix": "BOT_PREFIX_GOES_HERE",
-  "post_channel" :"CHANNEL_NAME_GOES_HERE"
+  "post_channel" :"CHANNEL_NAME_GOES_HERE",
+  "pingable_role": "PINGABLE_ROLE_ID",
+  "perm_roles": ["FIRST_ROLE_NAME","SECOND_ROLE_NAME"]
 }
