@@ -141,6 +141,8 @@ client.on("message", async (message) => {
 				message.channel.send("Use `~server` to get server stats");
 				message.channel.send("Use `~post` to send messages to announcement channel");
 				message.channel.send("Use `~fcm` to send FCM messages");
+				message.channel.send("Use `~notify` to send both FCM as well as announcements. Using this will ping the role ID as mentioned in your configuration file");
+
 
 			default:
 				message.channel.send("What are you sayin' bro?? That's not a command!");
