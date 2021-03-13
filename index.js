@@ -33,7 +33,7 @@ client.on("message", async (message) => {
 	//message.member.roles.cache.find(role => console.log(role.name))
 	var flag = "false";
 	for (var roles in perm_roles) {
-		if (message.member.roles.cache.find(role => (role.name === perm_roles[roles])==true)) {
+		if (message.member.roles.cache.some(role => (role.name === perm_roles[roles])==true)) {
 			flag = "true";
 			break;
 		}
@@ -108,8 +108,8 @@ client.on("message", async (message) => {
 				send_fcm_message(msgTitle, msgContent);
 				var role = '<@&';
 				role = role.concat(pingable_role, '>')
-				announce_channel(role);
-				announce_channel(msgContent);
+				const msgNotify = role.concat(" ", msgContent);
+				announce_channel(msgNotify);
 				break;
 
 
@@ -142,7 +142,7 @@ client.on("message", async (message) => {
 				message.channel.send("Use `~post` to send messages to announcement channel");
 				message.channel.send("Use `~fcm` to send FCM messages");
 				message.channel.send("Use `~notify` to send both FCM as well as announcements. Using this will ping the role ID as mentioned in your configuration file");
-
+				break;
 
 			default:
 				message.channel.send("What are you sayin' bro?? That's not a command!");
