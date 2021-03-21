@@ -1,12 +1,12 @@
 const firebase = require("firebase/app");
-var serviceAccount = require("./wt21key.json");
+var serviceAccount = require("./FIREBASE_ADMIN_SDK.json");
 
 require("dotenv").config();
 
 let registrationTokens = []
 async function getTokens(admin) {
     const db = admin.firestore();
-    const devices = db.collection('devices');
+    const devices = db.collection('ENTER_COLLECTION_NAME_HERE');
     const markers = [];
     let reg= [];
     await devices.get()

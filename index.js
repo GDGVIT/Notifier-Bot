@@ -6,7 +6,7 @@ const {perm_roles} = require("./config.json");
 const {pingable_role} = require("./config.json");
 var admin = require("firebase-admin");
 const firebase = require("firebase/app");
-var serviceAccount = require("./wt21key.json");
+var serviceAccount = require("./FIREBASE_ADMIN_SDK.json");
 const getInfo = require("./firestore_tokens");
 
 admin.initializeApp({
