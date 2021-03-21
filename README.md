@@ -69,8 +69,8 @@ Vishesh Bansal
 </a>
 </p>
 </td>
-<td>
-	</tr>
+
+</tr>
 </table>
 
 <p align="center">
